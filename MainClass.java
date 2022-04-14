@@ -16,25 +16,30 @@ import sun.misc.IOUtils;
 import javax.swing.*;
 import javax.swing.JOptionPane;
 /**
- *
- * @author diego
+ * Word Occurrences Project
+ * @author Diego A. Suarez Larios 
  */
-public class MainClass {
 
+public class MainClass {
+/** 
+* - Executes methods for user interface
+and word count calculations. 
+*/
     public static void main(String[] args) throws IOException {
 
                 userInterface();
-
                 countWords();      
    
     }
-    
 
-
-    //User interface
-    public static void userInterface(){
-    //FILE CHOOSER?
-        
+/** 
+* 
+- Contains Jframe objects presented to the user with options
+to interact with the program or exit. Furthermore, there is a 
+welcome message each time the program is started, followed by a 
+switch-case statement to present the user with the options. 
+*/
+     public static void userInterface(){
         //Setting up a frame 
         JFrame frame = new JFrame("Word Counter"); //set the tittle of the window 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //close operation
@@ -44,12 +49,10 @@ public class MainClass {
         frame.setVisible(true); //show it
         //Welcome message
         JOptionPane.showMessageDialog(frame,"Welcome to the word counter!");
-
         String select = JOptionPane.showInputDialog(frame,"Select an option: \n"+"\nPress 1 to exit."+"\n"+"\nPress 2 to run the program");
                             int select1 = Integer.parseInt(select);
                             int option = 0;
                             switch(option){
-
                                 case 1:
                                 {
                                     countWords();
@@ -60,29 +63,28 @@ public class MainClass {
                                 }
 
                             }
-
         }
 
-
-
-        //Word count
+/** 
+* 
+This  method contains the calculations done to 
+present the user with the amount of occurrences
+a word has in the document. Said document is found
+by using a file input stream followed by looping through 
+the array of words to produce the required output. 
+*/        
         public static void countWords(){
-
             try{
 
                 File f = new File("C:\\Users\\diego\\Desktop\\Assignments\\theFile.txt");
                 FileInputStream fin=new FileInputStream(f);    
                 //count the word
                 int count;
-
                 //making byte array
                 byte[] byteArray = new byte[(int)f.length()];
                 fin.read(byteArray);
-
                 String s = new String(byteArray);
-
                 String[] words = s.split(" "); // splits whole article into individual word strings
-
                 // finds list of unique words
                 List<String> wordList = new ArrayList<String>(Arrays.asList(words));
                 for (int i = 1; i < wordList.size(); i++) {
@@ -96,9 +98,7 @@ public class MainClass {
                         }
                     }
                 }
-
                 int[] countList = new int[wordList.size()];
-
                 // counts how many times each word appears
                 for(int i = 0; i < wordList.size(); i++)
                 {
@@ -110,17 +110,12 @@ public class MainClass {
                         }
                     }
                 }
-
-                // prints both lists
+                // Prints both lists
                 for (int i = 0; i < wordList.size(); i++)
                 {
-
                     System.out.println(wordList.get(i) + "\t\tCount: " + countList[i]);
-
                 }
-
               }catch(Exception e){System.out.println(e);
             }
-
         }
 }
